@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASL Alphabet Trainer</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -12,25 +13,30 @@
         <h1>ASL Alphabet Trainer</h1>
 
         <div class="main-content">
-            <!-- Left section: Camera feed -->
+            <!-- Camera Section -->
             <div class="camera-section">
                 <div class="video-container">
-                    <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Webcam Feed" 
-                        onerror="this.alt='Video feed failed to load. Is the server running and camera connected?'; this.style.display='none'; document.getElementById('video-error').style.display='block';">
+                    <img 
+                        id="video-feed" 
+                        src="{{ url_for('video_feed') }}" 
+                        alt="Webcam Feed"
+                        onerror="handleVideoError()"
+                    >
                     <div id="video-error" style="display: none; color: white; padding: 20px;">
-                        Video feed failed to load.
+                        Video feed failed to load. Is the server running and camera connected?
                     </div>
                 </div>
                 <div class="status" id="status-message">Initializing...</div>
             </div>
 
-            <!-- Right section: Training interface -->
+            <!-- Training Section -->
             <div class="training-section">
                 <div class="display-area">
                     <div class="letter-box target-letter">
                         <p class="letter" id="target-letter">A</p>
                         <p class="label">Target Letter</p>
                     </div>
+
                     <div class="letter-box detected-letter waiting" id="detected-box">
                         <p class="letter" id="detected-letter">?</p>
                         <p class="label">Detected Sign</p>
@@ -43,14 +49,40 @@
                         <p class="label">Reference Sign</p>
                     </div>
                 </div>
-                
+
                 <button id="next-letter-btn">Next Letter</button>
             </div>
         </div>
     </div>
-    <footer style="text-align: center; padding: 20px; margin-top: 20px; position: fixed; bottom: 0; width: 100%; color: black;background-color: white; left: 0;">Created by: Neeraja M J, Porchezhian R, Swetha Suresh, Aadithya Jayakaran</footer>
 
+    <footer class="footer">
+        Created by: Neeraja M J, Porchezhian R, Swetha Suresh, Aadithya Jayakaran
+    </footer>
 
+    <!-- JS -->
+    <script>
+        function handleVideoError() {
+            const videoFeed = document.getElementById('video-feed');
+            const errorDiv = document.getElementById('video-error');
+            videoFeed.style.display = 'none';
+            errorDiv.style.display = 'block';
+            document.getElementById('status-message').innerText = "Camera not available.";
+        }
+    </script>
     <script src="{{ url_for('static', filename='js/trainer.js') }}"></script>
+
+    <style>
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            color: black;
+            left: 0;
+        }
+    </style>
 </body>
 </html>
