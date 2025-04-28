@@ -1,0 +1,6 @@
+Flask>=2.0
+opencv-python>=4.5
+tensorflow>=2.8 # Or a version compatible with your model
+mediapipe>=0.9
+numpy>=1.20
+# Add specific versions if needed for compatibility

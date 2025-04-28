@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASL Practice Mode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/practice.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ASL Practice Mode</h1>
+
+        <!-- Input Section -->
+        <div class="practice-header">
+            <div class="input-area">
+                <input type="text" id="practice-input" placeholder="Enter a word or name...">
+                <button id="start-practice-btn" class="primary-button">Start Practice</button>
+            </div>
+            <div class="practice-progress" id="practice-progress-display">Enter text and click Start</div>
+        </div>
+
+        <div class="main-content">
+            <!-- Left Section -->
+            <div class="interaction-section">
+                <div class="display-area">
+                    <div class="letter-box target-letter">
+                        <p class="letter" id="target-letter">-</p>
+                        <p class="label">Target Letter</p>
+                    </div>
+                    <div class="letter-box detected-letter waiting" id="detected-box">
+                        <p class="letter" id="detected-letter">?</p>
+                        <p class="label">Detected Sign</p>
+                    </div>
+                </div>
+
+                <div class="asl-reference-container">
+                    <div class="asl-reference">
+                        <img id="asl-reference-img" src="" alt="ASL Reference" class="asl-image">
+                        <p class="label">Reference Sign</p>
+                    </div>
+                </div>
+
+                <button id="next-practice-letter-btn" class="secondary-button">Next Letter</button>
+            </div>
+
+            <!-- Right Section -->
+            <div class="camera-section">
+                <div class="video-container">
+                    <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Webcam Feed" 
+                        onerror="this.alt='Video feed failed to load. Is the server running and camera connected?'; this.style.display='none'; document.getElementById('video-error').style.display='block';">
+                    <div id="video-error" style="display: none; color: white; padding: 20px;">
+                        Video feed failed to load.
+                    </div>
+                </div>
+                <div class="status" id="status-message">Initializing...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/practice.js') }}"></script>
+</body>
+</html>
